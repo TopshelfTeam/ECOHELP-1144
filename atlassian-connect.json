@@ -1,6 +1,6 @@
 {
-  "key": "my-app",
-  "name": "My app",
+  "key": "ecohelp-1144",
+  "name": "ECOHELP-1144",
   "description": "My very first app",
   "baseUrl": "{{localBaseUrl}}",
   "authentication": {
@@ -9,35 +9,55 @@
   "lifecycle": {
     "installed": "/installed"
   },
-  "scopes": ["READ"],
+  "scopes": ["READ", "WRITE"],
   "apiMigrations": {
     "signed-install": true
   },
   "modules": {
-    "generalPages": [
+    "jiraIssueContents": [
       {
-        "key": "hello-world-page-jira",
-        "location": "system.top.navigation.bar",
+        "key": "issue-left-view",
         "name": {
-          "value": "Hello World"
+          "value": "ECOHELP-1144 Issue View"
         },
-        "url": "/hello-world",
-        "conditions": [
+        "target": {
+          "type": "web_panel",
+          "url": "/hello-world?projectKey={project.key}&projectId={project.id}&issueKey={issue.key}&issueId={issue.id}"
+        },
+        "tooltip": {
+          "value": ""
+        },
+        "icon": {
+          "width": 24,
+          "height": 24,
+          "url": "/images/menu.png"
+        },
+        "contentPresentConditions": [
           {
             "condition": "user_is_logged_in"
           }
-        ]
-      },
+        ],
+        "jiraNativeAppsEnabled": true
+      }
+    ],
+    "jiraEntityProperties": [
       {
-        "key": "hello-world-page-confluence",
-        "location": "system.header/left",
+        "key": "history-indexing",
         "name": {
-          "value": "Hello World"
+          "value": "History index",
+          "i18n": "history.index"
         },
-        "url": "/hello-world",
-        "conditions": [
+        "entityType": "issue",
+        "keyConfigurations": [
           {
-            "condition": "user_is_logged_in"
+            "propertyKey": "history_last_index_date",
+            "extractions": [
+              {
+                "objectName": "last_updated_date",
+                "type": "date",
+                "alias": "last_index_date"
+              }
+            ]
           }
         ]
       }
